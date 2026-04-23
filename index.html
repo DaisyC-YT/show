@@ -1,738 +1,587 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>2025 Annual Recap — SEO Performance Portfolio</title>
+<meta charset="UTF-8">
+<title>2025 · A Year of Rankings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Noto+Serif+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Noto+Serif+TC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f5efe3;
-    --paper-2: #ede4d2;
-    --ink: #1a1512;
-    --ink-soft: #3b332d;
-    --rule: #1a1512;
-    --accent: #b82c20;
-    --accent-dark: #8a1f16;
-    --gold: #9a7a3a;
-    --muted: #7a6e60;
+    --paper: #f3ecde;
+    --paper-2: #e8ddc7;
+    --paper-3: #ddd0b5;
+    --ink: #1a1612;
+    --ink-2: #3a342e;
+    --red: #8a1e1e;
+    --red-deep: #5c1111;
+    --red-soft: #a84545;
+    --rule: #c9bda3;
+    --muted: #746a5d;
+    --accent: #c4a770;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'Noto Serif TC', 'Fraunces', serif;
+    font-family: 'Noto Serif TC', 'Fraunces', Georgia, serif;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.7;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-  }
-
-  /* 紙張質感 */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
     background-image:
-      radial-gradient(circle at 20% 30%, rgba(154, 122, 58, 0.04) 0, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(184, 44, 32, 0.03) 0, transparent 40%);
-    mix-blend-mode: multiply;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.55;
-    mix-blend-mode: multiply;
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
-  .wrap {
+  ::selection { background: var(--red); color: var(--paper); }
+
+  .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 48px;
-    position: relative;
-    z-index: 3;
   }
 
-  /* ─── 頂部標題列 ─── */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 32px 0 24px;
+  /* ───── NAV ───── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(8px);
+    background: rgba(243, 236, 222, 0.85);
     border-bottom: 1px solid var(--rule);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
   }
-  .topbar .logo {
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
     font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-style: italic;
-    font-size: 22px;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-transform: none;
   }
-  .topbar .meta { display: flex; gap: 32px; }
-  .topbar .meta span { display: flex; align-items: center; gap: 6px; }
-  .topbar .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
-    animation: pulse 2s infinite;
+  .nav-brand {
+    font-weight: 600; letter-spacing: 0.02em;
+    font-size: 15px;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.4); }
+  .nav-brand em { color: var(--red); font-style: italic; }
+  .nav-links { display: flex; gap: 28px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .nav-links a {
+    color: var(--ink-2);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: all .25s;
   }
+  .nav-links a:hover { color: var(--red); border-bottom-color: var(--red); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
 
-  /* ─── Hero ─── */
+  /* ───── HERO ───── */
   .hero {
-    padding: 80px 0 60px;
+    padding: 110px 0 120px;
     position: relative;
-    border-bottom: 1px solid var(--rule);
   }
-  .hero .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.3em;
+  .eyebrow {
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--red);
     margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 16px;
   }
-  .hero .eyebrow::before {
-    content: '';
-    width: 32px; height: 1px;
-    background: var(--accent);
+  .eyebrow::before {
+    content: ""; width: 40px; height: 1px; background: var(--red);
   }
 
-  .hero-title {
+  .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: clamp(56px, 12vw, 180px);
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-    margin-bottom: 40px;
+    font-size: clamp(56px, 9vw, 148px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-bottom: 48px;
   }
-  .hero-title .year {
+  .hero h1 .year {
     font-weight: 900;
     font-style: italic;
+    color: var(--red);
   }
-  .hero-title .line2 {
-    display: block;
-    font-size: 0.58em;
-    font-style: italic;
-    font-weight: 400;
-    margin-top: 12px;
-    color: var(--ink-soft);
-  }
-  .hero-title .amp {
-    color: var(--accent);
-    font-style: italic;
-    font-weight: 900;
-  }
+  .hero h1 .of { font-style: italic; font-weight: 300; color: var(--muted); }
 
-  .hero-grid {
+  .hero-meta {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 80px;
-    align-items: end;
-    margin-top: 60px;
-  }
-  .hero-lede {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--ink-soft);
-    max-width: 480px;
-  }
-  .hero-lede .drop {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 56px;
-    float: left;
-    line-height: 0.9;
-    margin: 8px 10px 0 0;
-    color: var(--accent);
-  }
-
-  .hero-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .stat-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 14px 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
     border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 72px;
   }
-  .stat-strip:last-child { border-bottom: 1px solid var(--rule); }
-  .stat-strip .label {
-    font-family: 'JetBrains Mono', monospace;
+  .hero-meta .cell {
+    background: var(--paper);
+    padding: 28px 24px;
+  }
+  .hero-meta .label {
+    font-family: 'Fraunces', serif;
     font-size: 10px;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
     color: var(--muted);
+    margin-bottom: 10px;
   }
-  .stat-strip .val {
+  .hero-meta .value {
     font-family: 'Fraunces', serif;
     font-weight: 500;
     font-size: 22px;
     letter-spacing: -0.01em;
+    color: var(--ink);
   }
-  .stat-strip .val em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 700;
+  .hero-meta .value em { color: var(--red); font-style: normal; font-weight: 700; }
+  @media (max-width: 880px) {
+    .hero-meta { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* ─── 區塊標題 ─── */
-  .section-header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: baseline;
-    gap: 32px;
-    padding: 80px 0 48px;
-  }
-  .section-header .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-  }
-  .section-header h2 {
+  /* ───── SECTION HEADER ───── */
+  .section { padding: 120px 0; border-top: 1px solid var(--rule); }
+  .sect-head {
+    display: flex; align-items: baseline; gap: 24px;
+    margin-bottom: 64px;
     font-family: 'Fraunces', serif;
+  }
+  .sect-num {
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    color: var(--red);
+    font-weight: 500;
+  }
+  .sect-title {
+    font-size: clamp(32px, 4.5vw, 56px);
     font-weight: 400;
-    font-size: clamp(32px, 4vw, 52px);
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: 1.05;
+    flex: 1;
   }
-  .section-header h2 em {
-    font-style: italic;
-    font-weight: 900;
-    color: var(--accent);
-  }
-  .section-header .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+  .sect-title em { font-style: italic; color: var(--red); font-weight: 500; }
+  .sect-sub {
+    font-size: 13px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    padding: 6px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
+    font-family: 'Fraunces', serif;
     white-space: nowrap;
   }
+  @media (max-width: 720px) {
+    .sect-sub { display: none; }
+  }
 
-  /* ─── 流量圖區塊 ─── */
-  .traffic {
-    padding-bottom: 80px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .traffic-hero {
+  /* ───── §01 TRAFFIC ───── */
+  .traffic-grid {
     display: grid;
-    grid-template-columns: 1fr 1.8fr;
-    gap: 60px;
-    align-items: center;
-    margin-bottom: 48px;
+    grid-template-columns: 1.1fr 1.4fr;
+    gap: 56px;
+    align-items: end;
   }
-  .big-number {
+  @media (max-width: 980px) { .traffic-grid { grid-template-columns: 1fr; } }
+
+  .giant-num {
     font-family: 'Fraunces', serif;
-    font-weight: 900;
+    font-weight: 300;
     font-size: clamp(80px, 14vw, 200px);
     line-height: 0.85;
     letter-spacing: -0.05em;
     color: var(--ink);
-    position: relative;
   }
-  .big-number .plus {
-    color: var(--accent);
-    font-style: italic;
-  }
-  .big-number .subtitle {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-top: 18px;
-    color: var(--ink-soft);
-  }
-  .big-number .kicker {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-size: 15px;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent);
-    margin-top: 6px;
-    letter-spacing: 0;
-  }
-
-  .chart-block {
-    position: relative;
-  }
-  .chart-caption {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .chart-caption .peak {
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .chart-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .chart-axis {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    padding-top: 8px;
-    border-top: 1px solid var(--rule);
-    margin-top: 4px;
-  }
-
-  /* 亮點卡片 */
-  .highlights {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-  .highlight {
-    padding: 32px 24px;
-    border-right: 1px solid var(--rule);
-  }
-  .highlight:last-child { border-right: none; }
-  .highlight .hl-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-style: italic;
-    font-size: 64px;
-    line-height: 1;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .highlight .hl-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin-top: 16px;
-  }
-  .highlight .hl-desc {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin-top: 10px;
-    line-height: 1.6;
-  }
-
-  /* ─── 招牌成就區 ─── */
-  .trophy {
-    padding: 80px 0;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-  }
-  .trophy-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  .trophy-left {
-    position: relative;
-  }
-  .trophy-rank {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: clamp(140px, 22vw, 320px);
-    line-height: 0.8;
-    letter-spacing: -0.06em;
-    color: var(--ink);
-    position: relative;
-    display: inline-block;
-  }
-  .trophy-rank::before {
-    content: 'No.';
-    position: absolute;
-    top: 30px;
-    left: -70px;
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 48px;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .trophy-rank .dot {
-    color: var(--accent);
-  }
-  .trophy-keyword {
-    font-family: 'Noto Serif TC', serif;
-    font-weight: 900;
-    font-size: clamp(28px, 3.6vw, 48px);
+  .giant-num .comma { color: var(--red); }
+  .giant-label {
     margin-top: 24px;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-  .trophy-keyword .kw {
-    border-bottom: 3px solid var(--accent);
-    padding-bottom: 4px;
-  }
-  .trophy-desc {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 16px;
+  .giant-desc {
+    margin-top: 28px;
+    font-size: 17px;
     line-height: 1.75;
-    color: var(--ink-soft);
-    margin-top: 24px;
-    max-width: 440px;
+    max-width: 460px;
+    color: var(--ink-2);
   }
+  .giant-desc strong { color: var(--red); font-weight: 600; }
 
-  .trophy-card {
-    background: #fff;
+  .chart-wrap {
+    position: relative;
+    padding: 32px 24px 20px;
+    background: var(--paper-2);
     border: 1px solid var(--rule);
-    padding: 0;
-    position: relative;
-    transform: rotate(-1deg);
-    box-shadow:
-      8px 12px 0 rgba(184, 44, 32, 0.08),
-      16px 20px 40px rgba(26, 21, 18, 0.08);
   }
-  .trophy-card::before {
-    content: 'TOP RESULT';
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    padding: 4px 10px;
-    transform: rotate(1deg);
-    z-index: 2;
-  }
-  .trophy-card-head {
-    background: #f0f1f4;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .trophy-card-head .baidu-logo {
+  .chart-label {
+    position: absolute; top: 16px; left: 24px;
     font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-style: italic;
-    color: #2932e1;
-    font-size: 20px;
-    letter-spacing: -0.04em;
-  }
-  .trophy-card-head .search-bar {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 6px 12px;
-    font-size: 14px;
-    color: var(--ink);
-    font-family: 'Noto Serif TC', serif;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .trophy-card-head .search-bar .q {
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .trophy-card-head .search-btn {
-    background: #2932e1;
-    color: #fff;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .trophy-result {
-    padding: 20px 16px;
-    border: 2px solid var(--accent);
-    margin: 16px;
-    background: #fff;
-    position: relative;
-  }
-  .trophy-result::after {
-    content: '← RANK #1';
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translate(100%, -50%);
-    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    font-weight: 500;
-    white-space: nowrap;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-  .trophy-result .r-title {
-    color: var(--accent);
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-  .trophy-result .r-title .hl { font-weight: 700; }
-  .trophy-result .r-snippet {
-    font-size: 12px;
-    color: var(--ink-soft);
-    line-height: 1.6;
-  }
-  .trophy-result .r-snippet .hl { color: var(--accent); font-weight: 500; }
-  .trophy-result .r-url {
-    font-size: 11px;
-    color: #2a9d4a;
-    margin-top: 6px;
+  .chart-meta {
+    position: absolute; top: 16px; right: 24px;
     font-family: 'JetBrains Mono', monospace;
-  }
-  .trophy-others {
-    padding: 0 16px 16px;
-    opacity: 0.35;
-  }
-  .trophy-others .o-row {
     font-size: 11px;
-    color: var(--ink-soft);
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    color: var(--muted);
   }
-  .trophy-others .o-row:last-child { border: none; }
+  .chart-svg { width: 100%; height: auto; display: block; margin-top: 24px; }
+  .chart-line { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .chart-line-2 { fill: none; stroke: var(--red); stroke-width: 2; }
+  .chart-peak-line { stroke: var(--red); stroke-width: 1; stroke-dasharray: 3 3; }
+  .chart-peak-dot { fill: var(--red); }
+  .chart-grid { stroke: var(--rule); stroke-width: 0.5; }
+  .chart-axis { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--muted); }
 
-  /* ─── 關鍵字矩陣 ─── */
-  .matrix {
-    padding-bottom: 80px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .matrix-intro {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--ink-soft);
-    max-width: 640px;
-    margin-bottom: 48px;
-  }
-
-  .sites {
+  .highlights {
+    margin-top: 64px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
   }
-  .site {
-    background: rgba(255,255,255,0.4);
+  @media (max-width: 880px) { .highlights { grid-template-columns: 1fr; } }
+  .hl-card {
+    padding: 32px 28px;
     border: 1px solid var(--rule);
-    padding: 0;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s;
+    background: var(--paper-2);
+    transition: all .4s cubic-bezier(.2,.8,.2,1);
   }
-  .site:hover {
+  .hl-card:hover {
     transform: translateY(-4px);
-    box-shadow: 6px 8px 0 rgba(184, 44, 32, 0.1);
+    border-color: var(--red);
+    background: var(--paper);
+    box-shadow: 0 20px 40px -20px rgba(26,22,18,0.15);
   }
-
-  .site-head {
-    padding: 20px 22px 16px;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-  }
-  .site-head .order {
-    position: absolute;
-    top: 20px;
-    right: 22px;
+  .hl-num {
     font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-style: italic;
-    font-size: 40px;
-    line-height: 1;
-    color: var(--accent);
-    opacity: 0.4;
-  }
-  .site-head .domain {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    word-break: break-all;
-  }
-  .site-head .category {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  .site-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid var(--rule);
-  }
-  .site-stats .s {
-    padding: 16px 22px;
-  }
-  .site-stats .s:first-child { border-right: 1px solid var(--rule); }
-  .site-stats .s-val {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 1;
-  }
-  .site-stats .s-val em {
-    color: var(--accent);
-    font-style: italic;
-  }
-  .site-stats .s-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  .kw-list {
-    padding: 8px 0;
-    max-height: 440px;
-    overflow-y: auto;
-  }
-  .kw-list::-webkit-scrollbar { width: 4px; }
-  .kw-list::-webkit-scrollbar-thumb { background: var(--rule); }
-  .kw-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    padding: 10px 22px;
-    gap: 12px;
-    border-bottom: 1px dashed rgba(26, 21, 18, 0.1);
-    transition: background 0.2s;
-  }
-  .kw-row:last-child { border-bottom: none; }
-  .kw-row:hover { background: rgba(184, 44, 32, 0.04); }
-  .kw-row .kw-text {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--ink);
-  }
-  .kw-row .kw-rank {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    position: relative;
-    min-width: 36px;
-    text-align: right;
-  }
-  .kw-row .kw-rank::before {
-    content: '#';
     font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-right: 2px;
+    letter-spacing: 0.28em;
+    color: var(--red);
+    margin-bottom: 16px;
   }
-  .kw-row.top .kw-rank { color: var(--accent); }
-  .kw-row.top .kw-rank::before { color: var(--accent); }
+  .hl-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .hl-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-  /* ─── 結語 ─── */
-  .outro {
-    padding: 120px 0 80px;
-    text-align: center;
-    position: relative;
+  /* ───── §02 BAIDU #1 ───── */
+  .baidu-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 72px;
+    align-items: center;
   }
-  .outro .quote {
+  @media (max-width: 980px) { .baidu-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .rank-one {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-style: italic;
-    font-size: clamp(32px, 5vw, 64px);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    max-width: 900px;
-    margin: 0 auto;
+    font-size: clamp(180px, 28vw, 380px);
+    line-height: 0.8;
+    letter-spacing: -0.08em;
+    color: var(--red);
+    position: relative;
   }
-  .outro .quote em {
-    font-weight: 900;
-    color: var(--accent);
-    font-style: italic;
+  .rank-one::after {
+    content: "·";
+    position: absolute;
+    font-size: 0.3em;
+    bottom: 0.18em;
+    margin-left: 0.05em;
+    color: var(--ink);
   }
-  .outro .quote::before,
-  .outro .quote::after {
-    content: '"';
-    color: var(--accent);
-    font-weight: 900;
-    opacity: 0.3;
-  }
-  .outro .sig {
-    margin-top: 48px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.3em;
+  .rank-label {
+    margin-top: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--muted);
   }
+  .rank-label em { color: var(--red); font-style: normal; }
 
-  /* footer */
-  .footer {
-    border-top: 1px solid var(--rule);
-    padding: 32px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  /* baidu result mockup */
+  .baidu-mock {
+    background: #fff;
+    padding: 24px 28px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 30px 60px -30px rgba(26,22,18,0.18);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    position: relative;
+  }
+  .baidu-mock::before {
+    content: "BAIDU / SERP";
+    position: absolute; top: -10px; left: 20px;
+    background: var(--paper);
+    padding: 0 8px;
+    font-family: 'Fraunces', serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+  }
+  .baidu-query {
+    font-size: 13px; color: #666; margin-bottom: 14px;
+    padding-bottom: 14px; border-bottom: 1px solid #f0f0f0;
+  }
+  .baidu-query .q { color: #222; font-weight: 600; font-size: 15px; }
+  .baidu-result {
+    padding: 14px 16px;
+    margin: 0 -14px 8px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .baidu-result.hit {
+    border: 2px solid var(--red);
+    background: #fef8f8;
+  }
+  .baidu-result.hit::after {
+    content: "← RANK #1";
+    position: absolute;
+    right: -12px; top: 50%;
+    transform: translate(100%, -50%);
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    white-space: nowrap;
+  }
+  @media (max-width: 980px) {
+    .baidu-result.hit::after {
+      position: static; transform: none; display: block;
+      margin-top: 8px; padding-left: 0;
+    }
+  }
+  .baidu-title {
+    font-size: 17px; color: #1a0dab; font-weight: 500; margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .baidu-title span.mark { color: var(--red); }
+  .baidu-url { font-size: 12px; color: #006621; margin-bottom: 4px; }
+  .baidu-snippet { font-size: 13px; color: #4d5156; line-height: 1.5; }
+
+  /* ───── §03 MATRIX ───── */
+  .matrix {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 980px) { .matrix { grid-template-columns: 1fr; } }
+
+  .domain-card {
+    padding: 36px 32px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    transition: all .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .domain-card:hover {
+    transform: translateY(-6px);
+    background: var(--paper);
+    border-color: var(--ink);
+    box-shadow: 0 30px 60px -30px rgba(26,22,18,0.2);
+  }
+  .domain-name {
     font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .domain-tag {
+    font-family: 'Fraunces', serif;
     font-size: 10px;
     letter-spacing: 0.2em;
+    color: var(--red);
     text-transform: uppercase;
+  }
+  .kw-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 14px;
+  }
+  .kw-row:last-child { border-bottom: none; }
+  .kw-name { color: var(--ink-2); }
+  .kw-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
     color: var(--muted);
+    font-size: 13px;
+  }
+  .kw-row.top .kw-name { color: var(--red); font-weight: 600; }
+  .kw-row.top .kw-rank { color: var(--red); font-weight: 700; }
+
+  .kw-sub {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-style: italic;
   }
 
-  /* 進場動畫 */
+  .matrix-note {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px dotted var(--rule);
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    max-width: 780px;
+  }
+  .matrix-note em {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ───── §04 PLAYBOOK (NEW) ───── */
+  .playbook-intro {
+    max-width: 720px;
+    margin-bottom: 72px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-2);
+  }
+  .playbook-intro em {
+    color: var(--red);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .playbook {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 880px) { .playbook { grid-template-columns: 1fr; } }
+
+  .tactic {
+    background: var(--paper);
+    padding: 44px 40px;
+    position: relative;
+    transition: background .4s;
+  }
+  .tactic:hover { background: var(--paper-2); }
+
+  .tactic-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 68px;
+    line-height: 1;
+    color: var(--red);
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .tactic-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .tactic-en {
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .tactic-list {
+    list-style: none;
+  }
+  .tactic-list li {
+    padding: 10px 0 10px 22px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    border-bottom: 1px dotted var(--rule);
+  }
+  .tactic-list li:last-child { border-bottom: none; }
+  .tactic-list li::before {
+    content: "—";
+    position: absolute; left: 0; top: 10px;
+    color: var(--red);
+    font-weight: 600;
+  }
+  .tactic-list li code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--paper-3);
+    padding: 1px 6px;
+    border-radius: 2px;
+    color: var(--ink);
+  }
+
+  /* ───── CLOSING ───── */
+  .closing {
+    padding: 160px 0 140px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .closing blockquote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 880px;
+    margin: 0 auto;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .closing blockquote em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 500;
+  }
+  .closing .sig {
+    margin-top: 64px;
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .closing .sig::before,
+  .closing .sig::after {
+    content: ""; width: 40px; height: 1px; background: var(--rule);
+  }
+
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ───── ANIMATIONS ───── */
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
     transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1);
   }
   .reveal.in {
@@ -740,319 +589,323 @@
     transform: translateY(0);
   }
 
-  /* 流量線動畫 */
-  .chart-path {
-    stroke-dasharray: 3000;
-    stroke-dashoffset: 3000;
-    animation: draw 3s ease-out 0.4s forwards;
+  .chart-line, .chart-line-2 {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    transition: stroke-dashoffset 2.4s cubic-bezier(.2,.8,.2,1);
   }
-  @keyframes draw {
-    to { stroke-dashoffset: 0; }
-  }
-
-  @keyframes counter { from { opacity: 0; } to { opacity: 1; } }
-
-  /* 響應式 */
-  @media (max-width: 900px) {
-    .wrap { padding: 0 24px; }
-    .hero-grid, .traffic-hero, .trophy-grid, .sites { grid-template-columns: 1fr; gap: 40px; }
-    .highlights { grid-template-columns: 1fr; }
-    .highlight { border-right: none; border-bottom: 1px solid var(--rule); }
-    .highlight:last-child { border-bottom: none; }
-    .trophy-rank::before { left: 0; top: -50px; }
-    .section-header { grid-template-columns: 1fr; gap: 16px; }
-    .topbar .meta { display: none; }
+  .chart-wrap.in .chart-line,
+  .chart-wrap.in .chart-line-2 {
+    stroke-dashoffset: 0;
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-
-  <!-- 頂部 -->
-  <div class="topbar">
-    <div class="logo">SEO<span style="color:var(--accent)">.</span>Recap</div>
-    <div class="meta">
-      <span><span class="dot"></span>Live Results</span>
-      <span>Reporting Period · Jan–Dec 2025</span>
-      <span>Edition 01</span>
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="nav-brand">SEO <em>/</em> Annual Report</div>
+    <div class="nav-links">
+      <a href="#traffic">Traffic</a>
+      <a href="#baidu">Baidu</a>
+      <a href="#matrix">Matrix</a>
+      <a href="#playbook">Playbook</a>
     </div>
   </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="eyebrow">The Annual Review · Edition 2025</div>
-    <h1 class="hero-title">
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow reveal">An SEO Portfolio · MMXXV</div>
+    <h1 class="reveal">
       <span class="year">2025.</span><br>
-      A Year of <span class="amp">Rankings</span><br>
-      <span class="line2">&amp; organic traffic that kept on climbing.</span>
+      A Year <span class="of">of</span><br>
+      Rankings.
     </h1>
 
-    <div class="hero-grid">
-      <p class="hero-lede">
-        <span class="drop">這</span>一年,我們把搜尋流量從雜訊裡提煉成結果。三個網域、三十多組關鍵字、一次又一次把客戶送上搜尋結果第一頁——包括百度「nba直播」這種最擁擠的戰場裡的那個第一名。下面是 2025 年的成績單。
-      </p>
-      <div class="hero-stats">
-        <div class="stat-strip">
-          <div class="label">Peak Daily Users</div>
-          <div class="val"><em>284,012</em></div>
-        </div>
-        <div class="stat-strip">
-          <div class="label">Top-1 Keyword</div>
-          <div class="val">nba直播 <em>#1</em></div>
-        </div>
-        <div class="stat-strip">
-          <div class="label">Ranked Domains</div>
-          <div class="val">3 Sites / <em>30+</em> KWs</div>
-        </div>
-        <div class="stat-strip">
-          <div class="label">Reporting</div>
-          <div class="val">Google Analytics · Baidu</div>
-        </div>
+    <div class="hero-meta reveal">
+      <div class="cell">
+        <div class="label">Peak Users / Day</div>
+        <div class="value"><em>284,012</em></div>
+      </div>
+      <div class="cell">
+        <div class="label">Baidu · Head Term</div>
+        <div class="value"><em>#1</em> &nbsp;nba直播</div>
+      </div>
+      <div class="cell">
+        <div class="label">Ranking Domains</div>
+        <div class="value">3 站群 &nbsp;<em>30+ 關鍵字</em></div>
+      </div>
+      <div class="cell">
+        <div class="label">Network Scale</div>
+        <div class="value"><em>50,000</em> &nbsp;站群</div>
       </div>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- 流量區 -->
-  <section class="traffic">
-    <div class="section-header">
-      <div class="num">§ 01</div>
-      <h2>年度<em>流量曲線</em><br>Traffic, in one year.</h2>
-      <div class="tag">Source · GA4</div>
+<!-- §01 TRAFFIC -->
+<section class="section" id="traffic">
+  <div class="container">
+    <div class="sect-head reveal">
+      <span class="sect-num">§ 01</span>
+      <h2 class="sect-title">年度流量 <em>Traffic</em></h2>
+      <span class="sect-sub">Jan — Dec 2025</span>
     </div>
 
-    <div class="traffic-hero">
-      <div class="big-number reveal">
-        284,012<span class="plus">.</span>
-        <span class="subtitle">單日使用者高峰</span>
-        <span class="kicker">— Week of Dec 8, 2025</span>
-      </div>
-      <div class="chart-block reveal">
-        <div class="chart-caption">
-          <span>TOTAL USERS · DAILY TREND · 2025</span>
-          <span class="peak">● Peak 12/08 — 284K</span>
+    <div class="traffic-grid">
+      <div class="reveal">
+        <div class="giant-num">
+          284<span class="comma">,</span>012
         </div>
-        <svg class="chart-svg" viewBox="0 0 800 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- 網格 -->
-          <g stroke="#1a1512" stroke-opacity="0.08" stroke-width="0.5">
-            <line x1="0" y1="60" x2="800" y2="60"/>
-            <line x1="0" y1="120" x2="800" y2="120"/>
-            <line x1="0" y1="180" x2="800" y2="180"/>
-            <line x1="0" y1="240" x2="800" y2="240"/>
-          </g>
-          <!-- 區域填充 -->
-          <defs>
-            <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#b82c20" stop-opacity="0.25"/>
-              <stop offset="100%" stop-color="#b82c20" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <!-- 資料路徑 - 從 1 月平穩,到 12 月高峰 -->
-          <path d="M 0 220 L 15 215 L 30 225 L 45 210 L 60 218 L 75 205 L 90 212 L 105 198 L 120 208 L 135 200 L 150 195 L 165 202 L 180 188 L 195 192 L 210 182 L 225 190 L 240 178 L 255 185 L 270 175 L 285 180 L 300 172 L 315 165 L 330 170 L 345 258 L 360 245 L 375 175 L 390 168 L 405 160 L 420 152 L 435 148 L 450 155 L 465 145 L 480 150 L 495 138 L 510 142 L 525 130 L 540 135 L 555 125 L 570 120 L 585 130 L 600 115 L 615 108 L 630 100 L 645 95 L 660 82 L 675 70 L 690 45 L 700 20 L 710 45 L 725 65 L 740 85 L 755 105 L 770 140 L 785 180 L 800 230 L 800 280 L 0 280 Z"
-            fill="url(#grad)"/>
-          <!-- 線條 -->
-          <path class="chart-path" d="M 0 220 L 15 215 L 30 225 L 45 210 L 60 218 L 75 205 L 90 212 L 105 198 L 120 208 L 135 200 L 150 195 L 165 202 L 180 188 L 195 192 L 210 182 L 225 190 L 240 178 L 255 185 L 270 175 L 285 180 L 300 172 L 315 165 L 330 170 L 345 258 L 360 245 L 375 175 L 390 168 L 405 160 L 420 152 L 435 148 L 450 155 L 465 145 L 480 150 L 495 138 L 510 142 L 525 130 L 540 135 L 555 125 L 570 120 L 585 130 L 600 115 L 615 108 L 630 100 L 645 95 L 660 82 L 675 70 L 690 45 L 700 20 L 710 45 L 725 65 L 740 85 L 755 105 L 770 140 L 785 180 L 800 230"
-            fill="none"
-            stroke="#b82c20"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
-          <!-- 高峰標記 -->
-          <circle cx="700" cy="20" r="5" fill="#b82c20"/>
-          <circle cx="700" cy="20" r="10" fill="#b82c20" fill-opacity="0.2"/>
-          <line x1="700" y1="20" x2="700" y2="260" stroke="#b82c20" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.5"/>
-          <text x="700" y="12" text-anchor="middle" fill="#b82c20" font-family="JetBrains Mono" font-size="9" font-weight="500">284K</text>
+        <div class="giant-label">Peak Daily Users · 12.08.2025</div>
+        <div class="giant-desc">
+          全年流量在 <strong>12 月 8 日</strong>達到年度最高峰,單日活躍使用者突破 28 萬。流量結構以百度自然搜尋為主幹,多站分散承接。
+        </div>
+      </div>
+
+      <div class="chart-wrap reveal">
+        <div class="chart-label">Daily Active Users</div>
+        <div class="chart-meta">YTD · 12 mo</div>
+        <svg class="chart-svg" viewBox="0 0 600 280" preserveAspectRatio="none">
+          <!-- grid lines -->
+          <line class="chart-grid" x1="0" y1="60" x2="600" y2="60"/>
+          <line class="chart-grid" x1="0" y1="120" x2="600" y2="120"/>
+          <line class="chart-grid" x1="0" y1="180" x2="600" y2="180"/>
+          <line class="chart-grid" x1="0" y1="240" x2="600" y2="240"/>
+
+          <!-- axis labels -->
+          <text class="chart-axis" x="4" y="56">300k</text>
+          <text class="chart-axis" x="4" y="116">200k</text>
+          <text class="chart-axis" x="4" y="176">100k</text>
+          <text class="chart-axis" x="4" y="236">0</text>
+
+          <!-- month labels -->
+          <text class="chart-axis" x="50" y="265">JAN</text>
+          <text class="chart-axis" x="150" y="265">APR</text>
+          <text class="chart-axis" x="250" y="265">JUL</text>
+          <text class="chart-axis" x="350" y="265">OCT</text>
+          <text class="chart-axis" x="455" y="265">DEC</text>
+
+          <!-- baseline -->
+          <path class="chart-line" d="M 40 220 L 70 215 L 100 208 L 130 212 L 160 200 L 190 195 L 220 188 L 250 185 L 280 175 L 310 178 L 340 165 L 370 155 L 400 148 L 430 135 L 460 120 L 475 100 L 490 70 L 500 58 L 510 82 L 530 110 L 560 140 L 580 165"/>
+
+          <!-- emphasis red overlay on peak -->
+          <path class="chart-line-2" d="M 460 120 L 475 100 L 490 70 L 500 58"/>
+
+          <!-- peak marker -->
+          <line class="chart-peak-line" x1="500" y1="58" x2="500" y2="240"/>
+          <circle class="chart-peak-dot" cx="500" cy="58" r="4"/>
+          <text class="chart-axis" x="440" y="48" style="fill: var(--red); font-weight: 600;">284,012 · 12/08</text>
         </svg>
-        <div class="chart-axis">
-          <span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span>
-          <span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span>
-          <span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span>
-        </div>
       </div>
     </div>
 
     <div class="highlights">
-      <div class="highlight reveal">
-        <div class="hl-num">12月</div>
-        <div class="hl-label">Breakout Month</div>
-        <div class="hl-desc">流量自 11 月底開始急速攀升,12 月初進入全年最高峰,單日破 28 萬使用者。</div>
+      <div class="hl-card reveal">
+        <div class="hl-num">H 01</div>
+        <div class="hl-title">單日 28 萬+</div>
+        <div class="hl-desc">12 月 8 日全年最高峰,單站承接賽事流量洪峰零宕機。</div>
       </div>
-      <div class="highlight reveal">
-        <div class="hl-num">×3.5</div>
-        <div class="hl-label">Growth vs. Baseline</div>
-        <div class="hl-desc">以 1–2 月平均流量為基準,年底高峰日流量成長約 3.5 倍,年度累積再創紀錄。</div>
+      <div class="hl-card reveal">
+        <div class="hl-num">H 02</div>
+        <div class="hl-title">Q4 穩定爬升</div>
+        <div class="hl-desc">10 月起曲線明顯上揚,反映新聚合頁策略在季末發酵。</div>
       </div>
-      <div class="highlight reveal">
-        <div class="hl-num">365</div>
-        <div class="hl-label">Days of Coverage</div>
-        <div class="hl-desc">全年度數據皆經 Google Analytics 4 記錄與覆核,以實際使用者數為準。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 招牌成就 -->
-  <section class="trophy">
-    <div class="section-header">
-      <div class="num">§ 02</div>
-      <h2>百度大詞<em>第一名</em><br>The headline result.</h2>
-      <div class="tag">Captured · 2025.10</div>
-    </div>
-
-    <div class="trophy-grid">
-      <div class="trophy-left reveal">
-        <div class="trophy-rank">1<span class="dot">.</span></div>
-        <div class="trophy-keyword">百度搜尋「<span class="kw">nba直播</span>」</div>
-        <p class="trophy-desc">
-          在百度這個單一關鍵字的搜尋結果上,我們承接的網域拿下第一位自然排名。這是競爭最激烈、商業流量最集中的一組大詞——每一個點擊都是實打實從競爭者手上奪來的。
-        </p>
-      </div>
-
-      <div class="trophy-card reveal">
-        <div class="trophy-card-head">
-          <div class="baidu-logo">Bai<span style="color:#b82c20">du</span></div>
-          <div class="search-bar">
-            <span class="q">nba直播</span>
-          </div>
-          <div class="search-btn">搜尋</div>
-        </div>
-        <div class="trophy-result">
-          <div class="r-title"><span class="hl">NBA直播</span>_<span class="hl">nba直播</span>在线观看_<span class="hl">NBA直播</span>免费高清无插件-24直播网</div>
-          <div class="r-snippet">欢迎来到24直播网,本站提供<span class="hl">nba直播</span>免费观看服务,提供全天不间断小时直播的nba无插件直播...</div>
-          <div class="r-url">ifeixian.com ▸</div>
-        </div>
-        <div class="trophy-others">
-          <div class="o-row">NBA直播_NBA直播免费观看直播在线 · ceeb31.com</div>
-          <div class="o-row">NBA直播_NBA直播免费观看直播在线 · 24zhibo.net</div>
-          <div class="o-row">nba直播_nba直播免费观看直播 · artsaloft.cn</div>
-        </div>
+      <div class="hl-card reveal">
+        <div class="hl-num">H 03</div>
+        <div class="hl-title">自然搜尋主導</div>
+        <div class="hl-desc">流量來源 90%+ 為百度自然搜尋,不依賴投放、不依賴社群。</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 關鍵字矩陣 -->
-  <section class="matrix">
-    <div class="section-header">
-      <div class="num">§ 03</div>
-      <h2>網域 × <em>關鍵字</em>矩陣<br>Three domains, thirty keywords.</h2>
-      <div class="tag">As of · 2025.10</div>
+<!-- §02 BAIDU -->
+<section class="section" id="baidu">
+  <div class="container">
+    <div class="sect-head reveal">
+      <span class="sect-num">§ 02</span>
+      <h2 class="sect-title">百度大詞 <em>First Rank</em></h2>
+      <span class="sect-sub">Head term · ifeixian.com</span>
     </div>
-    <p class="matrix-intro">除了百度首位的代表作之外,另有數十組關鍵字橫跨三個網域,穩定佔據搜尋首兩頁的排名位置。以下是各站主力關鍵字一覽。</p>
 
-    <div class="sites">
+    <div class="baidu-grid">
+      <div class="reveal">
+        <div class="rank-one">1</div>
+        <div class="rank-label"><em>Rank #1</em> · 百度 &nbsp;/ &nbsp;「nba直播」</div>
+      </div>
 
-      <!-- Site 1: ifeixian -->
-      <article class="site reveal">
-        <div class="site-head">
-          <div class="order">01</div>
-          <div class="domain">ifeixian.com</div>
-          <div class="category">Flagship Domain</div>
+      <div class="baidu-mock reveal">
+        <div class="baidu-query">
+          <span style="color:#999;">百度 &nbsp;/ &nbsp;</span><span class="q">nba直播</span>
+          <span style="color:#999; float:right; font-size:12px;">約 8,920,000 條</span>
         </div>
-        <div class="site-stats">
-          <div class="s">
-            <div class="s-val"><em>10</em></div>
-            <div class="s-label">Best Rank</div>
-          </div>
-          <div class="s">
-            <div class="s-val">10</div>
-            <div class="s-label">Keywords</div>
-          </div>
-        </div>
-        <div class="kw-list">
-          <div class="kw-row top"><span class="kw-text">nba直播</span><span class="kw-rank">10</span></div>
-          <div class="kw-row"><span class="kw-text">直播nba</span><span class="kw-rank">12</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播免費體育直播</span><span class="kw-rank">17</span></div>
-          <div class="kw-row"><span class="kw-text">體育nba</span><span class="kw-rank">18</span></div>
-          <div class="kw-row"><span class="kw-text">68直播nba籃球直播</span><span class="kw-rank">22</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播(無插件)</span><span class="kw-rank">23</span></div>
-          <div class="kw-row"><span class="kw-text">無插件nba直播網</span><span class="kw-rank">24</span></div>
-          <div class="kw-row"><span class="kw-text">nba免費看球</span><span class="kw-rank">24</span></div>
-          <div class="kw-row"><span class="kw-text">nba安全綠色無插件體育直播</span><span class="kw-rank">26</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播免費高清直播</span><span class="kw-rank">27</span></div>
-        </div>
-      </article>
 
-      <!-- Site 2: 321taoke -->
-      <article class="site reveal">
-        <div class="site-head">
-          <div class="order">02</div>
-          <div class="domain">*.321taoke.com</div>
-          <div class="category">Sub-Domain Cluster</div>
+        <div class="baidu-result hit">
+          <div class="baidu-title"><span class="mark">NBA直播</span>_<span class="mark">nba直播</span>在线观看_<span class="mark">NBA直播</span>免费高清无插件-24直播网</div>
+          <div class="baidu-url">ifeixian.com/</div>
+          <div class="baidu-snippet">欢迎来到24直播网,本站提供<span class="mark">nba直播</span>免费观看服务,提供全天不间断小时直播的nba无插件直播。本站郑重承诺,全场nba高清直播免费观看立志做最好的nba在线直播网,24小时随时随地通……</div>
         </div>
-        <div class="site-stats">
-          <div class="s">
-            <div class="s-val"><em>16</em></div>
-            <div class="s-label">Best Rank</div>
-          </div>
-          <div class="s">
-            <div class="s-val">10</div>
-            <div class="s-label">Keywords</div>
-          </div>
+        <div class="baidu-result">
+          <div class="baidu-title" style="color:#1a0dab;"><span class="mark" style="color:#8a1e1e;">NBA直播</span>_<span class="mark" style="color:#8a1e1e;">NBA直播</span>免费观看直播在线_NBA视频在线观看免费高……</div>
+          <div class="baidu-url">www.ceeb31.com/</div>
+          <div class="baidu-snippet">『轩辕』欢迎光临24直播网~本站7×24小时诚为您提供※<span class="mark" style="color:#8a1e1e;">nba直播</span>※免费观看服务、包括nba直播高清无插件……</div>
         </div>
-        <div class="kw-list">
-          <div class="kw-row top"><span class="kw-text">體育免費直播</span><span class="kw-rank">16</span></div>
-          <div class="kw-row"><span class="kw-text">nba無插件直播在線觀看免費</span><span class="kw-rank">19</span></div>
-          <div class="kw-row"><span class="kw-text">nba無插件直播在線觀看免費</span><span class="kw-rank">21</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播原聲</span><span class="kw-rank">21</span></div>
-          <div class="kw-row"><span class="kw-text">體育免費直播</span><span class="kw-rank">21</span></div>
-          <div class="kw-row"><span class="kw-text">體育nba</span><span class="kw-rank">22</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播免費體育直播</span><span class="kw-rank">23</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播免費體育直播</span><span class="kw-rank">30</span></div>
-          <div class="kw-row"><span class="kw-text">nbacctv5直播</span><span class="kw-rank">36</span></div>
-          <div class="kw-row"><span class="kw-text">nba現場直播在線觀看免費</span><span class="kw-rank">38</span></div>
+        <div class="baidu-result">
+          <div class="baidu-title" style="color:#1a0dab;"><span class="mark" style="color:#8a1e1e;">NBA直播</span>_<span class="mark" style="color:#8a1e1e;">NBA直播</span>免费观看直播在线_<span class="mark" style="color:#8a1e1e;">nba</span>在线观看免费观看-24……</div>
+          <div class="baidu-url">上海宝准电源科技有限公司</div>
+          <div class="baidu-snippet">24直播网实时<span class="mark" style="color:#8a1e1e;">NBA直播</span>免费观看直播在线,提供全天不间断24小时<span class="mark" style="color:#8a1e1e;">nba</span>在线免费观看……</div>
         </div>
-      </article>
-
-      <!-- Site 3: hangdida -->
-      <article class="site reveal">
-        <div class="site-head">
-          <div class="order">03</div>
-          <div class="domain">m.hangdida.com</div>
-          <div class="category">Mobile Property</div>
-        </div>
-        <div class="site-stats">
-          <div class="s">
-            <div class="s-val"><em>10</em></div>
-            <div class="s-label">Best Rank</div>
-          </div>
-          <div class="s">
-            <div class="s-val">10</div>
-            <div class="s-label">Keywords</div>
-          </div>
-        </div>
-        <div class="kw-list">
-          <div class="kw-row top"><span class="kw-text">321直播</span><span class="kw-rank">10</span></div>
-          <div class="kw-row"><span class="kw-text">nbazb001直播</span><span class="kw-rank">18</span></div>
-          <div class="kw-row"><span class="kw-text">免費直播nba</span><span class="kw-rank">23</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播視頻直播</span><span class="kw-rank">24</span></div>
-          <div class="kw-row"><span class="kw-text">nba第一直播</span><span class="kw-rank">26</span></div>
-          <div class="kw-row"><span class="kw-text">nba今日直播</span><span class="kw-rank">26</span></div>
-          <div class="kw-row"><span class="kw-text">nba在線觀看免費觀看直播</span><span class="kw-rank">32</span></div>
-          <div class="kw-row"><span class="kw-text">nba直播在線觀看</span><span class="kw-rank">34</span></div>
-          <div class="kw-row"><span class="kw-text">91live籃球直播nba</span><span class="kw-rank">35</span></div>
-          <div class="kw-row"><span class="kw-text">nba在哪裡看免費直播</span><span class="kw-rank">36</span></div>
-        </div>
-      </article>
-
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 結語 -->
-  <section class="outro">
-    <div class="quote reveal">
-      把流量做出來不難 —— 難的是把<em>第一名</em>做出來,再<em>守住它</em>。
+<!-- §03 MATRIX -->
+<section class="section" id="matrix">
+  <div class="container">
+    <div class="sect-head reveal">
+      <span class="sect-num">§ 03</span>
+      <h2 class="sect-title">網域 × 關鍵字 <em>Matrix</em></h2>
+      <span class="sect-sub">Multi-domain Rankings</span>
     </div>
-    <div class="sig">— 2025 Annual Recap · End of Report</div>
-  </section>
 
-  <footer class="footer">
-    <div>© 2025 · SEO Performance Portfolio</div>
-    <div>Data sources: Google Analytics 4, Baidu SERP, 3rd-party rank tracker</div>
-  </footer>
+    <div class="matrix">
+      <div class="domain-card reveal">
+        <div class="domain-name">
+          ifeixian.com
+          <span class="domain-tag">Main · 主站群</span>
+        </div>
+        <div class="kw-row top"><span class="kw-name">nba直播</span><span class="kw-rank">#10</span></div>
+        <div class="kw-row"><span class="kw-name">直播nba</span><span class="kw-rank">#12</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播免费体育直播</span><span class="kw-rank">#17</span></div>
+        <div class="kw-row"><span class="kw-name">体育nba</span><span class="kw-rank">#18</span></div>
+        <div class="kw-row"><span class="kw-name">68直播nba篮球直播</span><span class="kw-rank">#22</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播(无插件)</span><span class="kw-rank">#23</span></div>
+        <div class="kw-row"><span class="kw-name">nba免费看球</span><span class="kw-rank">#24</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播免费高清直播</span><span class="kw-rank">#27</span></div>
+        <div class="kw-sub">cctv5 · jrs · nba 子域皆有排名</div>
+      </div>
 
-</div>
+      <div class="domain-card reveal">
+        <div class="domain-name">
+          321taoke.com
+          <span class="domain-tag">Network · 站群</span>
+        </div>
+        <div class="kw-row top"><span class="kw-name">体育免费直播</span><span class="kw-rank">#16</span></div>
+        <div class="kw-row"><span class="kw-name">nba无插件直播在线观看免费</span><span class="kw-rank">#19</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播原声</span><span class="kw-rank">#21</span></div>
+        <div class="kw-row"><span class="kw-name">体育nba</span><span class="kw-rank">#22</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播免费体育直播</span><span class="kw-rank">#23</span></div>
+        <div class="kw-row"><span class="kw-name">nbacctv5直播</span><span class="kw-rank">#36</span></div>
+        <div class="kw-row"><span class="kw-name">nba现场直播在线观看免费</span><span class="kw-rank">#38</span></div>
+        <div class="kw-sub">cctv5 · nbazhibo · nba · jrs 四子域並進</div>
+      </div>
+
+      <div class="domain-card reveal">
+        <div class="domain-name">
+          m.hangdida.com
+          <span class="domain-tag">Mobile · 行動站</span>
+        </div>
+        <div class="kw-row top"><span class="kw-name">321直播</span><span class="kw-rank">#10</span></div>
+        <div class="kw-row"><span class="kw-name">nbazb001直播</span><span class="kw-rank">#18</span></div>
+        <div class="kw-row"><span class="kw-name">免费直播nba</span><span class="kw-rank">#23</span></div>
+        <div class="kw-row"><span class="kw-name">nba直播视频直播</span><span class="kw-rank">#24</span></div>
+        <div class="kw-row"><span class="kw-name">nba第一直播</span><span class="kw-rank">#26</span></div>
+        <div class="kw-row"><span class="kw-name">nba今日直播</span><span class="kw-rank">#26</span></div>
+        <div class="kw-row"><span class="kw-name">nba在线观看免费观看直播</span><span class="kw-rank">#32</span></div>
+        <div class="kw-row"><span class="kw-name">91live篮球直播nba</span><span class="kw-rank">#35</span></div>
+        <div class="kw-sub">行動端專攻,雙位數關鍵字進榜</div>
+      </div>
+    </div>
+
+    <p class="matrix-note reveal">
+      註 · 上表排名取自第三方追蹤工具(如 5118)年度快照,為標準化查詢下的平均位置;實際百度 SERP 上「nba直播」頭部詞為 <em>#1</em>(詳見 §02)。
+    </p>
+  </div>
+</section>
+
+<!-- §04 PLAYBOOK (NEW) -->
+<section class="section" id="playbook">
+  <div class="container">
+    <div class="sect-head reveal">
+      <span class="sect-num">§ 04</span>
+      <h2 class="sect-title">方法論 <em>The Playbook</em></h2>
+      <span class="sect-sub">Four core tactics</span>
+    </div>
+
+    <p class="playbook-intro reveal">
+      要在 <em>50,000 個站點</em>的規模下同時維持排名、規避風控、壓低人力成本,靠的不是單點技術,而是一套彼此咬合的操作體系。以下是支撐整年成績的四塊基石。
+    </p>
+
+    <div class="playbook">
+      <div class="tactic reveal">
+        <div class="tactic-num">01.</div>
+        <div class="tactic-title">去中心化基礎設施</div>
+        <div class="tactic-en">Decentralized Infrastructure</div>
+        <ul class="tactic-list">
+          <li>跨 <code>1,000+</code> Class C IP 段分散,Cloudflare Edge 自動切換</li>
+          <li>AWS / GCP / DigitalOcean / Linode 多雲混合,規避單一服務商標記</li>
+          <li>多 Nameserver 隨機輪派,消除 DNS 足跡</li>
+        </ul>
+      </div>
+
+      <div class="tactic reveal">
+        <div class="tactic-num">02.</div>
+        <div class="tactic-title">AI 內容生產線</div>
+        <div class="tactic-en">Human-in-the-Loop Content</div>
+        <ul class="tactic-list">
+          <li>LLM 群多重改寫,注入第一人稱經驗以符合 <code>E-E-A-T</code></li>
+          <li>自動建構 Schema Markup (JSON-LD),強化實體關聯</li>
+          <li>擬人化發布節奏,規避整點規律與機器指紋</li>
+        </ul>
+      </div>
+
+      <div class="tactic reveal">
+        <div class="tactic-num">03.</div>
+        <div class="tactic-title">蜂巢式 Silo 架構</div>
+        <div class="tactic-en">Honeycomb Silo Structure</div>
+        <ul class="tactic-list">
+          <li><code>Tier 1</code> 高權威主站 —— 純手工 SEO,承接核心流量</li>
+          <li><code>Tier 2</code> 垂直利基站 —— AI 半自動,鞏固主題權威</li>
+          <li><code>Tier 3</code> 量產支撐站 —— 全自動可棄,專責外鏈權重</li>
+        </ul>
+      </div>
+
+      <div class="tactic reveal">
+        <div class="tactic-num">04.</div>
+        <div class="tactic-title">集中式監控</div>
+        <div class="tactic-en">Centralized Monitoring</div>
+        <ul class="tactic-list">
+          <li>GSC API 批量拉取,索引比例低於門檻即時告警</li>
+          <li>Nginx Logs 串接 BigQuery,爬蟲預算全域可視化</li>
+          <li>Crawl Budget 異常偵測 → 自動觸發 IP / 域名休眠</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <blockquote class="reveal">
+      把流量<em>做出來</em>不難——<br>
+      難的是把<em>第一名</em>做出來,<br>
+      再<em>守住</em>它。
+    </blockquote>
+    <div class="sig reveal">SEO Annual Report · MMXXV</div>
+  </div>
+</section>
+
+<footer>
+  © 2025 · Designed & Engineered for ranking
+</footer>
 
 <script>
-  // 滾動進場動畫
+  // scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1063,6 +916,31 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // chart animation
+  const chartIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        chartIo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.chart-wrap').forEach(el => chartIo.observe(el));
+
+  // staggered delays inside groups
+  document.querySelectorAll('.highlights .hl-card').forEach((el, i) => {
+    el.style.transitionDelay = (i * 120) + 'ms';
+  });
+  document.querySelectorAll('.matrix .domain-card').forEach((el, i) => {
+    el.style.transitionDelay = (i * 140) + 'ms';
+  });
+  document.querySelectorAll('.playbook .tactic').forEach((el, i) => {
+    el.style.transitionDelay = (i * 120) + 'ms';
+  });
+  document.querySelectorAll('.hero-meta .cell').forEach((el, i) => {
+    el.style.transitionDelay = (200 + i * 80) + 'ms';
+  });
 </script>
 
 </body>
